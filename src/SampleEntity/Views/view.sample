@@ -1,0 +1,23 @@
+@extends('entity-generator::layout')
+
+@section('header')
+	<a href="{{ route('{route_prefix}-index') }}" class="btn btn-info">{{ __('Go Back') }}</a>
+	<a href="{{ route('{route_prefix}-edit', ['id' => $item->id]) }}" class="btn btn-warning">{{ __('Edit') }}</a>
+	<a href="{{ route('{route_prefix}-delete', ['id' => $item->id]) }}" class="btn btn-danger">{{ __('Delete') }}</a>
+	<hr>
+@endsection
+
+@section('content')
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<tbody>
+				@foreach(\App\{model_name}::$viewFields as $field)
+					<tr>
+						<th>{{ __(ucfirst($field)) }}</th>
+						<td>{{ $item[$field] }}</td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+@endsection

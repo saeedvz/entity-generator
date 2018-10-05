@@ -1,0 +1,10 @@
+// {route_prefix}
+Route::group(['middleware' => 'auth', 'prefix' => '{route_prefix}'], function () {
+    Route::get('/', '{controller_name}@index')->name('{route_prefix}-index');
+    Route::get('create', '{controller_name}@showCreate')->name('{route_prefix}-create');
+    Route::post('create', '{controller_name}@create');
+    Route::get('view/{id}', '{controller_name}@view')->name('{route_prefix}-view');
+    Route::get('edit/{id}', '{controller_name}@showEdit')->name('{route_prefix}-edit');
+    Route::post('edit/{id}', '{controller_name}@edit');
+    Route::get('delete/{id}', '{controller_name}@delete')->name('{route_prefix}-delete');
+});

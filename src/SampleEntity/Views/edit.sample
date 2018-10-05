@@ -1,0 +1,23 @@
+@extends('entity-generator::layout')
+
+@section('header')
+	<h1>
+		<span>{{ $pageTitle ?? __('Edit') }}</span>
+		<a href="{{ route('{route_prefix}-index') }}" class="btn btn-info">{{ __('Go Back') }}</a>
+		<a href="{{ route('{route_prefix}-delete', ['id' => $item->id]) }}" class="btn btn-danger">{{ __('Delete') }}</a>
+	</h1>
+	<hr>
+@endsection
+
+@section('content')
+	<form method="post" action="{{ route('{route_prefix}-edit', ['id' => $item->id]) }}">
+		@csrf
+		@foreach(\App\{model_name}::$formFields as $key => $field)
+			<div class="form-group">
+				<label class="control-label">{{ __(ucfirst($key)) }}</label>
+				<input type="text" class="form-control" name="{{ $key }}" value="{{ $item[$key] }}">
+			</div>
+		@endforeach
+		<button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>
+	</form>
+@endsection

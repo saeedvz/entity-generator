@@ -1,0 +1,27 @@
+{
+  "name": "cotlet/entity-generator",
+  "description": "Cotlet Entity Generator",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Saeed Vaziry",
+      "email": "sa.vaziry@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Cotlet\\EntityGenerator\\": "src"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "dev"
+    },
+    "laravel": {
+      "providers": [
+        "Cotlet\\EntityGenerator\\EntityGeneratorServiceProvider"
+      ]
+    }
+  }
+}

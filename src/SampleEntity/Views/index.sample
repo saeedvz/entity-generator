@@ -1,0 +1,39 @@
+@extends('entity-generator::layout')
+
+@section('header')
+	<h1>
+		<span>{{ $pageTitle ?? __('Posts') }}</span>
+		<a href="{{ route('{route_prefix}-create') }}" class="btn btn-success">{{ __('Create New') }}</a>
+	</h1>
+	<hr>
+@endsection
+
+@section('content')
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					@foreach(\App\{model_name}::$tableFields as $field)
+						<th>{{ __(ucfirst($field)) }}</th>
+					@endforeach
+					<th>{{ __('Actions') }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($items as $item)
+					<tr>
+						@foreach(\App\{model_name}::$tableFields as $field)
+							<td>{{ $item[$field] }}</td>
+						@endforeach
+						<td>
+							<a href="{{ route('{route_prefix}-delete', ['id' => $item->id]) }}" class="btn btn-sm btn-danger">{{ __('Delete') }}</a>
+							<a href="{{ route('{route_prefix}-view', ['id' => $item->id]) }}" class="btn btn-sm btn-info">{{ __('View') }}</a>
+							<a href="{{ route('{route_prefix}-edit', ['id' => $item->id]) }}" class="btn btn-sm btn-warning">{{ __('Edit') }}</a>
+						</td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+		{!! $items->render() !!}
+	</div>
+@endsection

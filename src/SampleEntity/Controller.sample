@@ -1,0 +1,140 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class {controller_name} extends Controller
+{
+    /**
+     * Show the list.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $items = \App\{model_name}::where('status', '>', 0)->orderBy('id', 'desc')->paginate(10);
+
+        return view('{views_dir}.index')->with([
+            'pageTitle' => __('List'),
+            'items'     => $items
+        ]);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showCreate()
+    {
+        return view('{views_dir}.create')->with([
+            'pageTitle' => __('Create New')
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function create(Request $request)
+    {
+        $rules = \App\{model_name}::$formFields;
+        $this->validate($request, $rules);
+
+        $create = [];
+        foreach (\App\{model_name}::$formFields as $key => $field) {
+            $create[$key] = $request->input($key);
+        }
+        $item = \App\{model_name}::create($create);
+
+        return redirect()->route('{route_prefix}-view', ['id' => $item->id])
+            ->with('alert', 'success')
+            ->with('message', __('Created'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view(Request $request, $id)
+    {
+        $request->request->add(['id' => $id]);
+        $rules = [
+            'id' => 'required|exists:{table_name},id,status,1'
+        ];
+        $this->validate($request, $rules);
+
+        $item = \App\{model_name}::find($id);
+
+        return view('{views_dir}.view')
+            ->with('item', $item);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showEdit(Request $request, $id)
+    {
+        $request->request->add(['id' => $id]);
+        $rules = [
+            'id' => 'required|exists:{table_name},id,status,1'
+        ];
+        $this->validate($request, $rules);
+
+        $item = \App\{model_name}::find($id);
+
+        return view('{views_dir}.edit')->with([
+            'pageTitle' => __('Edit'),
+            'item'      => $item
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function edit(Request $request, $id)
+    {
+        $request->request->add(['id' => $id]);
+        $rules = \App\{model_name}::$formFields;
+        array_push($rules, ['id' => 'required|exists:{table_name},id,status,1']);
+        $this->validate($request, $rules);
+
+        $edit = [];
+        foreach (\App\{model_name}::$formFields as $key => $field) {
+            $edit[$key] = $request->input($key);
+        }
+        $item = \App\{model_name}::find($id);
+        $item->update($edit);
+
+        return redirect()->back()
+            ->with('alert', 'success')
+            ->with('message', __('Changes Saved'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request, $id)
+    {
+        $request->request->add(['id' => $id]);
+        $rules = [
+            'id' => 'required|exists:{table_name},id,status,1'
+        ];
+        $this->validate($request, $rules);
+
+        $item = \App\{model_name}::find($id);
+        $item->update([
+            'status' => -1,
+        ]);
+
+        return redirect()->route('{route_prefix}-index')
+            ->with('alert', 'success')
+            ->with('message', __('Deleted'));
+    }
+}
