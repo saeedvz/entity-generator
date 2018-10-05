@@ -15,9 +15,6 @@
     }
   },
   "extra": {
-    "branch-alias": {
-      "dev-master": "dev"
-    },
     "laravel": {
       "providers": [
         "Cotlet\\EntityGenerator\\EntityGeneratorServiceProvider"
