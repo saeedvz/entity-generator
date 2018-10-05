@@ -23,5 +23,6 @@
         "Cotlet\\EntityGenerator\\EntityGeneratorServiceProvider"
       ]
     }
-  }
+  },
+  "minimum-stability": "dev"
 }
