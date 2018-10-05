@@ -86,7 +86,7 @@ class EntityController extends Controller
         $migrationSample = File::get(__DIR__ . '/../SampleEntity/Migration.sample');
         $migration = str_replace('{u_table_name}', ucfirst($request->table_name), $migrationSample);
         $migration = str_replace('{table_name}', $request->table_name, $migration);
-        $migration = str_replace('{table_fields}' . "\n", $tableFields, $migration);
+        $migration = str_replace('{table_fields}', $tableFields, $migration);
         File::put(base_path('database/migrations/' . date('Y_m_d') . '_000000_create_' . $request->table_name . '_table.php'), $migration);
         Artisan::call('migrate');
     }
