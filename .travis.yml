@@ -3,3 +3,5 @@ language: php
 branches:
   only:
     - master
+
+script: vendor/bin/phpunit
