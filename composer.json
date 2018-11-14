@@ -1,6 +1,6 @@
 {
-  "name": "cotlet/entity-generator",
-  "description": "Cotlet Entity Generator",
+  "name": "saeedvaziry/entity-generator",
+  "description": "Laravel Entity Generator",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -11,13 +11,13 @@
   ],
   "autoload": {
     "psr-4": {
-      "Cotlet\\EntityGenerator\\": "src"
+      "SaeedVaziry\\EntityGenerator\\": "src"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Cotlet\\EntityGenerator\\EntityGeneratorServiceProvider"
+        "SaeedVaziry\\EntityGenerator\\EntityGeneratorServiceProvider"
       ]
     }
   },

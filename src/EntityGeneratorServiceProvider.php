@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotlet\EntityGenerator;
+namespace SaeedVaziry\EntityGenerator;
 
 use Illuminate\Support\ServiceProvider;
 

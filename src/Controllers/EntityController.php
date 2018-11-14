@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotlet\EntityGenerator\Controllers;
+namespace SaeedVaziry\EntityGenerator\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
