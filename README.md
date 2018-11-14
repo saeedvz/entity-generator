@@ -4,7 +4,7 @@ A simple visual entity generator for laravel
 
 ## Installation
 
-`composer require cotlet/entity-generator`
+`composer require saeedvaziry/entity-generator`
 
 ## Usage
 
